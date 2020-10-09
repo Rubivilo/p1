@@ -1,0 +1,148 @@
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <stdbool.h>
+#include <ctype.h>
+#include <unistd.h>
+#include <stdlib.h>
+#define MAX_INPUT 1024
+#define MAX_TOKEN 100
+#define MAX_HISTORIAL 4096
+
+typedef struct historial{
+	char comandos[MAX_HISTORIAL];
+	int posicion[MAX_HISTORIAL];
+}historial;
+
+int trocearCadena(char * cadena, char * trozos[]);
+void procesarEntrada();
+void authors(char *tokens, int ntokens);
+void pid();
+void ppid();
+void pwd(char *tokens, int ntokens, bool* end, historial historial);
+void cambiardir(char *tokens, int ntokens);
+void date(char *tokens, int ntokens, bool* end, historial historial);
+void hora(char *tokens, int ntokens, bool* en, historial historiald);
+void historic(char *tokens, int ntokens, bool* end, historial historial);
+void final(char *tokens, int ntokens, bool* end, historial historial);
+
+int main(){
+	bool end;
+	char input[MAX_INPUT];
+	char nTokens[MAX_TOKEN];
+	char *tokens[MAX_TOKEN]; 	
+	end = false;
+	while(!end){
+		printf("> ");
+		fgets(input, MAX_INPUT, stdin);
+		historial.comandos = input;
+		nTokens = trocearCadena(input, tokens);
+		procesarEntrada(tokens, nTokens, end, historial):
+	}
+	return 0;
+}
+
+int TrocearCadena(char * cadena, char * trozos[]){ 
+	int i=1;
+	if ((trozos[0]=strtok(cadena," \n\t"))==NULL)
+		return 0;
+	while ((trozos[i]=strtok(NULL," \n\t"))!=NULL)
+		i++;
+	return i;
+}
+
+void procesarEntrada(char *tokens, int ntokens, bool* end, historial historial){
+	if(strcmp(tokens[0], "authors" == 0)) authors(char* tokens, int ntokens);
+	else if(strcmp(tokens[0], "getpid" == 0)) pid();
+	else if(strcmp(tokens[0], "getppid" == 0)) ppid();
+	else if(strcmp(tokens[0], "pwd" == 0)) pwd();
+	else if(strcmp(tokens[0], "chdir" == 0)) cambiardir(char *tokens, int ntokens);
+	else if(strcmp(tokens[0], "date" == 0)) date();
+	else if(strcmp(tokens[0], "time" == 0)) hora();
+	else if(strcmp(tokens[0], "historic" == 0)) historic();
+	else if((strcmp(tokens[0], "quit" == 0) || (strcmp(tokens[0], "end" == 0) || (strcmp(tokens[0], "exit" == 0)) final();
+	else printf("Error");
+}
+
+void authors(char *tokens, int ntokens, bool* end, historial historial){
+	if(ntokens > 2){
+		//Printea error
+	}
+	else if(strcmp(tokens[1], "-l" == 0)){
+		printf("m.corujo@udc.es \n ");
+	}
+	else if(strcmp(tokens[1], "-n" == 0)){
+		printf("Martín Corujo Castro \n ");
+	}
+	else if(ntokens = 1){
+		printf("Martín Corujo Castro \t m.corujo@udc.es\n");
+	}
+	else printf(""); //Printea error
+}
+
+
+void pid(char *tokens, int ntokens, bool* end, historial historial){
+	int id;
+	id = getpid();
+	printf("%d\n", id);
+}
+
+void ppid(char *tokens, int ntokens, bool* end, historial historial){
+	int pid;
+	pid = getppid();
+	printf("%d\n", pid);
+}
+
+void pwd(char *tokens, int ntokens, bool* end, historial historial){
+	char directorio[MAX_INPUT];
+	if(getcwd(directorio, MAX_INPUT) == NULL) 
+		printf(""); //tamaño máximo superado
+	else printf("pwd: %s\n", directorio);
+}
+
+void cambiardir(char *tokens, int ntokens, bool* end, historial historial){
+	
+}
+void date(char *tokens, int ntokens, bool* end, historial historial){
+	struct tm* tiempo;
+	time_t hora;
+	char dia[218]; //en INPUT hay que poner el otro valor (?
+	hora = time(0);
+	tiempo = localtime(&hora);
+	strftime(dia, 218, "%d/%m/%y", tiempo);
+	printf("%s\n", tiempo);
+}
+void hora(char *tokens, int ntokens, bool* end, historial historial){
+	struct tm* tiempo;
+	time_t hora;
+	char minutos[128];
+	hora = time(0);
+	tiempo = localtime(&hora);
+	strftime(minutos, 128 , "%H : %M : %S", tiempo);
+	printf("%s\n", tiempo);
+}
+
+void historic(char *tokens, int ntokens, bool* end, historial historial){
+	int i;
+	if(ntokens >2){
+		//Printea error
+	}
+	else if(strcmp(tokens[1], "-c" == 0)){
+		for(i; i<MAX_HISTORIAL; i++){
+			strcpy(historial.comandos, "NULL");
+		}
+	}
+	else if{ // opcion para el -N
+		
+	}
+	else if{ //opcion para el -rN
+	
+	}
+	else{
+		
+	}
+}
+
+void final(char *tokens, int ntokens, bool* end, historial historial){
+	*end = true;
+}
