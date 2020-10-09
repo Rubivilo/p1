@@ -146,3 +146,8 @@ void historic(char *tokens, int ntokens, bool* end, historial historial){
 void final(char *tokens, int ntokens, bool* end, historial historial){
 	*end = true;
 }
+
+
+
+
+//Lo puedo editar cool
